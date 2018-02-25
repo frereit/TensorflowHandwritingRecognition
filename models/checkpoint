@@ -1,0 +1,6 @@
+model_checkpoint_path: "32x32_3conv_16_32_64_1norm_512.ckpt"
+all_model_checkpoint_paths: "..\\log\\model.ckpt-19400"
+all_model_checkpoint_paths: "..\\log\\model.ckpt-19600"
+all_model_checkpoint_paths: "..\\log\\model.ckpt-19800"
+all_model_checkpoint_paths: "..\\log\\model.ckpt-20000"
+all_model_checkpoint_paths: "32x32_3conv_16_32_64_1norm_512.ckpt"
