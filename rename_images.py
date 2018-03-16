@@ -1,15 +1,14 @@
 import os
 from shutil import copyfile
 
-by_merge_dir = "./by_merge"
-output_dir = "./data/"
-
 
 def get_class(str):
     return str.split("\\")[1]
 
 
 def main():
+    by_merge_dir = "./by_merge"
+    output_dir = "./data/"
     index = 0
     class_index = -1
     classes = []
@@ -20,10 +19,10 @@ def main():
                 class_index += 1
                 index = 0
             copyfile(os.path.join(subdir, file),
-                     os.path.join(output_dir, "class_" + str(class_index) + "_index_" + str(index) + ".png"))
+                     os.path.join(output_dir, "class_{}_index_{}.png".format(class_index, index)))
 
             print("Copied " + os.path.join(subdir, file) + " to "
-                  + os.path.join(output_dir, "class_" + str(class_index) + "_index_" + str(index) + ".png"))
+                  + os.path.join(output_dir, "class_{}_index_{}.png".format(class_index, index)))
             index += 1
 
 
