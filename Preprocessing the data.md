@@ -1,9 +1,9 @@
 ## Introduction
 
 #### What Will I Learn?
-In this tutorial we will download the [Speical Database 19](https://www.nist.gov/srd/nist-special-database-19), then sort
+In this tutorial we will download the [Special Database 19](https://www.nist.gov/srd/nist-special-database-19), then sort
 the images and rename them. After that, we use OpenCV to read the images as a numpy array and scale them down to 32x32
-and convert them to grayscale. We then saved these arrays to disk.
+and convert them to greyscale. We then saved these arrays to disk.
 
 #### Requirements
 
@@ -21,7 +21,7 @@ tensorflow. This is the first part, so look out for more!
 ##So, let's get started!
 
 ### 1. Downloading the data
-In this example, I will use the [Speical Database 19](https://www.nist.gov/srd/nist-special-database-19) published by 
+In this example, I will use the [Special Database 19](https://www.nist.gov/srd/nist-special-database-19) published by 
 the [National Institute for Standards And Technology](https://www.nist.gov/). It contains over 800,000 pre-classified 
 images of handwritten letters and digits. It differentiates between 47 classes: All uppercase letters, all numbers and a 
 few lower case letters. I downloaded the `by_merge.zip` file and saved in in my projects folder. 
@@ -202,9 +202,9 @@ And that's it. [Here](https://github.com/frereit/TensorflowHandwritingRecognitio
 full script. And, again, this could take a lot of time to complete, so be patient.
 
 ### Recap
-In this tutorial we downloaded the [Speical Database 19](https://www.nist.gov/srd/nist-special-database-19), then sorted
+In this tutorial we downloaded the [Special Database 19](https://www.nist.gov/srd/nist-special-database-19), then sorted
 the images and renamed them. After that, we used OpenCV to read the images as a numpy array and scaled them down to 32x32
-and converted them to grayscale. We then saved these arrays to disk.
+and converted them to greyscale. We then saved these arrays to disk.
 
 
 ## Curriculum
