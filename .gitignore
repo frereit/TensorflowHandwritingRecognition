@@ -107,8 +107,12 @@ venv.bak/
 
 # custom
 /data
+data/
+data__old/
 *.xml
 .idea/NIST.iml
 log/
 test/
 *.npy
+by_merge/
+models/

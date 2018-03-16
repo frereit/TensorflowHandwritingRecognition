@@ -79,7 +79,7 @@ def normal_full_layer(input_layer, size, act=tf.nn.relu, name="unspecified"):
 def main():
     single_image = dh.get_2d_array(sys.argv[1], (32,32,1))  # Convert image to numpy array
     X = np.array([single_image])  # Create array from image to fit shape of x (?,32,32,1)
-    checkpoint = "models/32x32_3conv_16_32_64_1norm_512.ckpt"  # Model used for prediction, must have the same graph structure!
+    checkpoint = "models/32x32_2conv_32_64_1norm_1024.ckpt"  # Model used for prediction, must have the same graph structure!
 
     # DICT
     classes = {
@@ -138,19 +138,20 @@ def main():
 
     # MODEL
     # filter size=(4,4); channels=1; filters=16; shape=?x32x32x32
-    convo_1 = convolutional_layer(x, shape=[4, 4, 1, 16], name="Convolutional_1")
+    convo_1 = convolutional_layer(x, shape=[4, 4, 1, 32], name="Convolutional_1")
     convo_1_pooling = max_pool_2by2(convo_1)  # shape=?x16x16x32
 
     # filter size=(4,4); channels=16; filters=32; shape=?x16x16x64
-    convo_2 = convolutional_layer(convo_1_pooling, shape=[4, 4, 16, 32], name="Convolutional_2")
+    convo_2 = convolutional_layer(convo_1_pooling, shape=[4, 4, 32, 64], name="Convolutional_2")
     convo_2_pooling = max_pool_2by2(convo_2)  # shape=?x8x8x64
+    convo_2_flat = tf.reshape(convo_2_pooling, [-1, 8 * 8 * 64])
 
     # filter size=(4,4); channels=32; filters=64; shape=?x8x8x32
-    convo_3 = convolutional_layer(convo_2_pooling, shape=[4, 4, 32, 64], name="Convolutional_3")
-    convo_3_pooling = max_pool_2by2(convo_3)  # shape=4x4x32
-    convo_3_flat = tf.reshape(convo_3_pooling, [-1, 4 * 4 * 64])  # Flatten convolutional layer
+    #convo_3 = convolutional_layer(convo_2_pooling, shape=[4, 4, 32, 64], name="Convolutional_3")
+    #convo_3_pooling = max_pool_2by2(convo_3)  # shape=4x4x32
+    #convo_3_flat = tf.reshape(convo_3_pooling, [-1, 4 * 4 * 64])  # Flatten convolutional layer
 
-    full_layer_one = normal_full_layer(convo_3_flat, 512, tf.nn.relu, name="Normal_Layer_1")
+    full_layer_one = normal_full_layer(convo_2_flat, 1024, tf.nn.relu, name="Normal_Layer_1")
     with tf.name_scope("dropout"):
         hold_prob = tf.placeholder(tf.float32)
         tf.summary.scalar("dropout_keep_probability", hold_prob)

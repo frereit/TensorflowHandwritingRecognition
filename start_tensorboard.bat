@@ -1,0 +1,1 @@
+tensorboard --logdir=D:/Coding/python/Tensorflow/NIST/log
