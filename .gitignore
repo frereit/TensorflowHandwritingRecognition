@@ -115,4 +115,3 @@ log/
 test/
 *.npy
 by_merge/
-models/

@@ -21,11 +21,11 @@ def main():
                 class_index += 1
                 index = 0
             if counter % 8 == 0 and file.endswith(".png"):
-                #copyfile(os.path.join(subdir, file),
-                #        os.path.join(output_dir, "class_{}_index_{}.png".format(class_index, index)))
+                copyfile(os.path.join(subdir, file),
+                        os.path.join(output_dir, "class_{}_index_{}.png".format(class_index, index)))
 
-                #print("Copied " + os.path.join(subdir, file) + " to "
-                #      + os.path.join(output_dir, "class_{}_index_{}.png".format(class_index, index)))
+                print("Copied " + os.path.join(subdir, file) + " to "
+                      + os.path.join(output_dir, "class_{}_index_{}.png".format(class_index, index)))
                 index += 1
                 n_copied += 1
             counter += 1
