@@ -1,3 +1,5 @@
+import argparse
+
 import tensorflow as tf
 import numpy as np
 import data_handler as dh
@@ -76,60 +78,60 @@ def normal_full_layer(input_layer, size, act=tf.nn.relu, name="unspecified"):
         return activations
 
 
-def main():
-    single_image = dh.get_2d_array(sys.argv[1], (32,32,1))  # Convert image to numpy array
+def predict(single_image):
+    tf.reset_default_graph()
     X = np.array([single_image])  # Create array from image to fit shape of x (?,32,32,1)
     checkpoint = "models/32x32_2conv_32_64_1norm_1024.ckpt"  # Model used for prediction, must have the same graph structure!
 
     # DICT
     classes = {
-        0:"0",
-        1:"1",
-        2:"2",
-        3:"3",
-        4:"4",
-        5:"5",
-        6:"6",
-        7:"7",
-        8:"8",
-        9:"9",
-        10:"A",
-        11:"B",
-        12:"C",
-        13:"D",
-        14:"E",
-        15:"F",
-        16:"G",
-        17:"H",
-        18:"I",
-        19:"J",
-        20:"K",
-        21:"L",
-        22:"M",
-        23:"N",
-        24:"O",
-        25:"P",
-        26:"Q",
-        27:"R",
-        28:"S",
-        29:"T",
-        30:"U",
-        31:"V",
-        32:"W",
-        33:"X",
-        34:"Y",
-        35:"Z",
-        36:"a",
-        37:"b",
-        38:"d",
-        39:"e",
-        40:"f",
-        41:"g",
-        42:"h",
-        43:"n",
-        44:"q",
-        45:"r",
-        46:"t"
+        0: "0",
+        1: "1",
+        2: "2",
+        3: "3",
+        4: "4",
+        5: "5",
+        6: "6",
+        7: "7",
+        8: "8",
+        9: "9",
+        10: "A",
+        11: "B",
+        12: "C",
+        13: "D",
+        14: "E",
+        15: "F",
+        16: "G",
+        17: "H",
+        18: "I",
+        19: "J",
+        20: "K",
+        21: "L",
+        22: "M",
+        23: "N",
+        24: "O",
+        25: "P",
+        26: "Q",
+        27: "R",
+        28: "S",
+        29: "T",
+        30: "U",
+        31: "V",
+        32: "W",
+        33: "X",
+        34: "Y",
+        35: "Z",
+        36: "a",
+        37: "b",
+        38: "d",
+        39: "e",
+        40: "f",
+        41: "g",
+        42: "h",
+        43: "n",
+        44: "q",
+        45: "r",
+        46: "t"
     }
 
     # VARIABLES
@@ -147,9 +149,9 @@ def main():
     convo_2_flat = tf.reshape(convo_2_pooling, [-1, 8 * 8 * 64])
 
     # filter size=(4,4); channels=32; filters=64; shape=?x8x8x32
-    #convo_3 = convolutional_layer(convo_2_pooling, shape=[4, 4, 32, 64], name="Convolutional_3")
-    #convo_3_pooling = max_pool_2by2(convo_3)  # shape=4x4x32
-    #convo_3_flat = tf.reshape(convo_3_pooling, [-1, 4 * 4 * 64])  # Flatten convolutional layer
+    # convo_3 = convolutional_layer(convo_2_pooling, shape=[4, 4, 32, 64], name="Convolutional_3")
+    # convo_3_pooling = max_pool_2by2(convo_3)  # shape=4x4x32
+    # convo_3_flat = tf.reshape(convo_3_pooling, [-1, 4 * 4 * 64])  # Flatten convolutional layer
 
     full_layer_one = normal_full_layer(convo_2_flat, 1024, tf.nn.relu, name="Normal_Layer_1")
     with tf.name_scope("dropout"):
@@ -178,10 +180,14 @@ def main():
     saver = tf.train.Saver()
 
     with tf.Session() as sess:
-        saver.restore(sess, checkpoint) # Restore saved Variables
-        predictions = sess.run(y_pred, feed_dict={x: X, hold_prob:1})
-        print("\nResult: \"" + classes[predictions.argmax()] + "\".")
+        saver.restore(sess, checkpoint)  # Restore saved Variables
+        predictions = sess.run(y_pred, feed_dict={x: X, hold_prob: 1})
+    return classes[predictions.argmax()]
 
 
 if __name__ == "__main__":
-    main()
+    ap = argparse.ArgumentParser()
+    ap.add_argument("-i", "--image", help="Path to the image file")
+    args = vars(ap.parse_args())
+    single_image = dh.get_2d_array(args["image"])
+    print("\nResult: \"" + predict(single_image) + "\".")

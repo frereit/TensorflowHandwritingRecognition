@@ -1,6 +1,0 @@
-model_checkpoint_path: "32x32_2conv_32_64_1norm_1024.ckpt"
-all_model_checkpoint_paths: "../log/model.ckpt-14200"
-all_model_checkpoint_paths: "../log/model.ckpt-14400"
-all_model_checkpoint_paths: "../log/model.ckpt-14600"
-all_model_checkpoint_paths: "../log/model.ckpt-14800"
-all_model_checkpoint_paths: "32x32_2conv_32_64_1norm_1024.ckpt"

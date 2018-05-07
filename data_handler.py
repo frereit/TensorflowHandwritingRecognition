@@ -7,6 +7,7 @@ import sys
 def get_2d_array(im_path):
     """Return image scaled with factor 0.5 as numpy array."""
     im_color = cv2.imread(im_path)  # Read the image as a numpy array.
+    im_color = im_color[32:64 + 32, 32:64 + 32]
     # Shape = (64,64,3) (x_pixels,y_pixels, color_channels)
     im_color = cv2.resize(im_color, (32,32))  # Rescale the image
     # Shape = (32,32,3) (x_pixels*scale, y_pixels*scale, color_channels)
