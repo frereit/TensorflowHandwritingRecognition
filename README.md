@@ -1,5 +1,7 @@
 # Handwriting Recognition
 
+NOT MAINTAINED!
+
 ## Introduction
 In this repository I used the [NIST Special Database 19](https://www.nist.gov/srd/nist-special-database-19) and [Tensorflow](https://www.tensorflow.org/) to create a convolutional neural network, which recognizes handwritten digits. It differentiates between 47 classes: All uppercase letters, all numbers and a few lower case letters.I was able to achieve an accuracy of about 87%. If you have any questions, please feel free to open an issue, I will respond to all issues and do my best to help.
 
